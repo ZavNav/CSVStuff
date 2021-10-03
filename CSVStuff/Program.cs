@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace CSVStuff
 {
@@ -10,8 +11,10 @@ namespace CSVStuff
     {
         static void Main(string[] args)
         {
-            string input = Console.ReadLine();
-            List<Pepka> kek = Refresh(input/*Path.GetFullPath("inputNew.csv")*/);
+            string fileX = @Console.ReadLine();
+            var filepath = Directory.GetParent(fileX).FullName + $"/{fileX}";
+            
+            List<Pepka> kek = Refresh(filepath);
             List<Pepka> lol = kek.OrderBy(x => x.id).ToList();
             int uniqcounter = 0;
             List<int> ids = new List<int>();
@@ -66,15 +69,15 @@ namespace CSVStuff
 
             }
 
-            foreach (var item in final)
-            {
-                foreach (var j in item)
-                {
-                    Console.WriteLine($"{j.id}, {j.dates}, {j.prType}");
-                }
-            }
+            // foreach (var item in final)
+            // {
+            //     foreach (var j in item)
+            //     {
+            //         Console.WriteLine($"{j.id}, {j.dates}, {j.prType}");
+            //     }
+            // }
 
-            string path = input/*"/Users/zavnav/RiderProjects/CSVStuff/CSVStuff/bin/Debug/net5.0/output.csv"*/;
+            string path = filepath/*"/Users/zavnav/RiderProjects/CSVStuff/CSVStuff/bin/Debug/net5.0/output.csv"*/;
             
             DataTable table = new DataTable();  
             table.Columns.Add();     
